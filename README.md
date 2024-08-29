@@ -1,5 +1,5 @@
-# Projetos
-Projetos / Projetos em Desenvolvimento
+# Projeto StoreGaming
+Projeto / Projeto em Desenvolvimento
 
 
-Pasta destinada para projeto desenvolvidos em aula do curso Sistemas de Informação (Faculdade - ITE, Instituição Toledo de Ensino).
+Pasta destinada para projeto o desenvolvimento do projeto SG
