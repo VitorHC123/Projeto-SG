@@ -2,4 +2,4 @@
 Projeto / Projeto em Desenvolvimento
 
 
-Pasta destinada para projeto o desenvolvimento do projeto SG
+Pasta destinada para o desenvolvimento do projeto SG
