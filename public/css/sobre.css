@@ -1,0 +1,79 @@
+/* public/css/sobre.css */
+
+/* Estilos gerais */
+.container {
+    max-width: 1200px;
+}
+
+/* Seção de Introdução */
+.intro-section {
+    text-align: center;
+    padding: 20px;
+}
+
+.title {
+    font-size: 3rem;
+    color: #343a40;
+}
+
+.description {
+    font-size: 1.25rem;
+    color: #6c757d;
+    margin-top: 10px;
+}
+
+/* Seção de História */
+.history-section .section-title {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.content-box {
+    font-size: 1rem;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Seção de Valores */
+.values-section .section-title {
+    font-size: 2rem;
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+.values-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.values-list li {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    color: #007bff;
+}
+
+/* Seção de Equipe */
+.team-section .section-title {
+    font-size: 2rem;
+    color: #dc3545;
+    margin-bottom: 20px;
+}
+
+.team-info {
+    font-size: 1rem;
+    line-height: 1.6;
+}

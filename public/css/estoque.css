@@ -1,0 +1,77 @@
+/* styles.css */
+
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Seção de Título */
+.stock-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.stock-title h1 {
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.stock-title p {
+    font-size: 1.25rem;
+    color: #666;
+}
+
+/* Tabela de Estoque */
+.stock-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.stock-table th, .stock-table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.stock-table thead {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.stock-table tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+}
+
+.stock-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.stock-table .btn {
+    border: none;
+    padding: 6px 12px;
+    margin: 0 5px;
+    color: #fff;
+    font-size: 0.875rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.stock-table .btn-warning {
+    background-color: #ffc107;
+}
+
+.stock-table .btn-danger {
+    background-color: #dc3545;
+}
