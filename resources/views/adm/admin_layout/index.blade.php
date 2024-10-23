@@ -7,6 +7,7 @@
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
     />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link
       rel="icon"
       href="/Admin/img/kaiadmin/favicon.ico"
@@ -87,19 +88,13 @@
                 <h4 class="text-section">Componentes</h4>
               </li>
               <li class="nav-item">
-                <a href="/adm-cadastro">
+                <a href="/cadastro">
                   <i class="far fa-chart-bar"></i>
                   <p>Cadastros</p>
                 </a>
                 
               </li>
-              <li class="nav-item">
-                <a href="widgets.html">
-                  <i class="fas fa-desktop"></i>
-                  <p>Widgets</p>
-                  <span class="badge badge-success">4</span>
-                </a>
-              </li>
+            
               
               <li class="nav-item">
                 <a href="/adm-jogos">
@@ -136,18 +131,7 @@
               <nav
                 class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"
               >
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <button type="submit" class="btn btn-search pe-1">
-                      <i class="fa fa-search search-icon"></i>
-                    </button>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Procurar ..."
-                    class="form-control"
-                  />
-                </div>
+                
               </nav>
 
               <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
@@ -394,7 +378,10 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Configuração da conta</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Sair</a>
+                        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                          @csrf
+                          <button type="submit" class="dropdown-item">Sair</button>
+                      </form>
                       </li>
                     </div>
                   </ul>

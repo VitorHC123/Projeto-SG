@@ -1,17 +1,24 @@
-.container_noticias{
+.tela_container_noticias {
     width: 100%;
     height: 100%;
-    
+    position: relative;
+    z-index: 1;
 }
 
-.content_noticias{
-    display: flex;
-   
+.conteudo {
+    position: absolute; 
+    top: 100px;
+    left: 0; 
+    width: 100%; 
+    z-index: 3; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 20px; 
+    text-align: center;
+    color: white; 
 }
 
-.img_noticia{
+.imgs_noticia {
     width: 100%;
     height: 100%;
-    
 }
 

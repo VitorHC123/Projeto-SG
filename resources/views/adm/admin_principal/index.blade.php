@@ -30,7 +30,7 @@
                 <div class="col col-stats ms-3 ms-sm-0">
                   <div class="numbers">
                     <p class="card-category">Perfis</p>
-                    <h4 class="card-title">1,294</h4>
+                    <h4 class="card-title">{{ $qtdaUsers }}</h4>
                   </div>
                 </div>
               </div>
@@ -108,7 +108,7 @@
           <div class="card card-round">
             <div class="card-body">
               <div class="card-head-row card-tools-still-right">
-                <div class="card-title"> Novos clientes</div>
+                <div class="card-title"> Perfis </div>
                 
               </div>
               <div class="card-list py-4">
@@ -121,8 +121,8 @@
                     />
                   </div>
                   <div class="info-user ms-3">
-                    <div class="username">Jimmy Denis</div>
-                    <div class="status">Graphic Designer</div>
+                    <div class="username">Vitor Hugo Correia</div>
+                    <div class="status">Dono e Fundador da SG </div>
                   </div>
                   <button class="btn btn-icon btn-link op-8 me-1">
                     <i class="far fa-envelope"></i>

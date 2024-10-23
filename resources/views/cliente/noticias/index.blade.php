@@ -1,6 +1,12 @@
 @extends('cliente.layout.index')
 @section('noticias')
 
+    <div class="tela_container_noticias">
+        <div class="cont_noticias">
+            <img src="/gif/noticia.gif" class="imgs_noticia">
+        </div>
+    </div>
+
     <div class="conteudo">
         <div class="text_noticias">
             <h4>Noticias</h4>
@@ -16,10 +22,8 @@
         </div>
     </div>
 
-    <div class="container_noticias">
-        <div class="content_noticias">
-            <img src="/gif/noticia.gif" class="img_noticia">
-        </div>
-    </div>
+
+
+    
     
 @stop

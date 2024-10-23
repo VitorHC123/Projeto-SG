@@ -27,11 +27,34 @@
                         <li><a href="/trabalhe-conosco">Trabalhe conosco</a></li>
                     </ul>
                 </div>
+                @auth
                 <div class="right-side">
-                    <form action="login">
-                        <button class="btn_login">Entrar</button>
-                    </form>
+                    <a href="#user-card" class="img-link">
+                        <img src="/img/users.png" alt="img_header_users" class="img_users" id="img_users">
+                    </a>
+                
+                    <div id="user-card" class="user-card">
+                        <ul>
+                            <li><a href="#">Meu Perfil</a></li>
+                            <li><a href="#">Configurações</a></li>
+                            <li><form action="{{ route('logout-users') }}" method="POST" style="display: inline;">
+                                @csrf
+                                <input type="submit" value="SAIR" class="logout-link">
+                            </form>
+                            </li>
+                        </ul>
+                    </div>
+                
+                    
                 </div>
+                
+                @else
+                    <div class="right-side">
+                        <form action="/login-user">
+                            <button class="btn_login">Entrar</button>
+                        </form>
+                    </div>
+                @endauth
             </div>
         </nav>
     </header>

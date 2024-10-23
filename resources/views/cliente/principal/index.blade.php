@@ -46,16 +46,16 @@
                 </div>
                 <div class="sub_jogos">
                     <div class="jogo">
-                        <a href=""><img src="../img/jogo_cod.jpg"></a>
+                        <a href="/download"><img src="../img/jogo_cod.jpg"></a>
                     </div>
                     <div class="jogo">
-                        <a href=""><img src="../img/valorant.jpg"></a>
+                        <a href="/download"><img src="../img/valorant.jpg"></a>
                     </div>
                     <div class="jogo">
-                        <a href=""><img src="../img/lol.jpg"></a>
+                        <a href="/download"><img src="../img/lol.jpg"></a>
                     </div>
                     <div class="jogo">
-                        <a href=""><img src="../img/roblox.png"></a>
+                        <a href="/download"><img src="../img/roblox.png"></a>
                     </div>
                     
                 </div>

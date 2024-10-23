@@ -10,4 +10,9 @@ class Jogo extends Model
     use HasFactory;
 
     protected $table = 'jogo';
+
+    public function user() {
+
+        return $this->belongsToMany('App\Models\User');
+       }
 }

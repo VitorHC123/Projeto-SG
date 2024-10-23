@@ -17,16 +17,10 @@ return new class extends Migration
             $table->string('descricao')->nullable();
             $table->float('preco')->nullable();
             $table->string('jogo_img')->nullable();
-            $table->integer('avalicao_positiva');
-            $table->integer('avalicao_negativa');
-            $table->bigInteger('fk_id_pagto')->unsigned();
             $table->bigInteger('fk_id_genero')->unsigned();
             $table->bigInteger('fk_id_imgs')->unsigned();
-            $table->bigInteger('fk_id_users')->unsigned();
+           
 
-            $table->foreign('fk_id_pagto')
-                    ->references('id')
-                    ->on('pagto');
 
             $table->foreign('fk_id_genero')
                     ->references('id')
@@ -36,9 +30,7 @@ return new class extends Migration
                     ->references('id')
                     ->on('imgs');
 
-            $table->foreign('fk_id_users')
-                    ->references('id')
-                    ->on('users');
+            
 
             $table->timestamps();
         });
