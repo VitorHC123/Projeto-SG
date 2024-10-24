@@ -5,6 +5,7 @@ use App\Http\Controllers\jogoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthUsersController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ImgsController;
 
 
 Route::get('/', [jogoController::class, 'index'])->name('principal');
@@ -69,15 +70,21 @@ Route::post('/login-user', [AuthUsersController::class, 'login']);
 
 //ADMIN
 Route::middleware('adminAuth')->group(function () {
-    Route::get('/cadastro', [AuthUsersController::class, 'index'])->name('cadastro');
+    
     Route::get('/adm', [AuthUsersController::class, 'qtdeUsers'])->name('qtdeUser'); 
 
-    Route::get('/usuario/{id}/jogos', [UserController::class, 'getJogosBaixados'])->name('usuario.jogos');
 
+    Route::get('/cadastro', [AuthUsersController::class, 'index'])->name('cadastro');
     Route::get('/cadastro/upd/{id}', [AuthUsersController::class, 'BuscaAlterar'])->name('cad_alterar');
     Route::post("cadastro/udp", [AuthUsersController::class, 'SalvarAlterecao'])->name('cad_alt_salva');
-
     Route::delete('/cadastro/exc/{id}', [AuthUsersController::class, 'destroy'])->name('cad_excluir');
+
+    Route::get('/imagens', [ImgsController::class, 'index'])->name('imagens');
+    Route::post('/imagens', [ImgsController::class, "SalvarNovaImagem"])->name('SalvarNovaImagem');
+    Route::post('imagens/udp/{id}', [ImgsController::class, 'SalvarAlterecaoImagens'])->name('img_alt_salva');
+    Route::delete('/imagens/exc/{id}', [ImgsController::class, 'destroyImagem'])->name('img_excluir');
+
+    
 
     Route::get('/adm-jogos', function () {
         return view('adm.admin_jogos.index');

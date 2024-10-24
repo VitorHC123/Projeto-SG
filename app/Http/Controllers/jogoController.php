@@ -12,18 +12,7 @@ class jogoController extends Controller
         return view('cliente.principal.index', compact('jogo'));
     }
 
-    
-    public function getJogosBaixadosPorUsuario($userId)
-    {
-        $jogos = DB::table('users_jogo')
-                    ->join('jogo', 'users_jogo.fk_jogo_id', '=', 'jogo.id')
-                    ->join('users', 'users_jogo.fk_user_id', '=', 'users.id')
-                    ->where('users.id', $userId)
-                    ->select('jogo.*', 'users_jogo.download_date')
-                    ->get();
-
-        return view('user.jogos', compact('jogos'));
-    }
+   
 
     public function SalvarNovoJogo(Request $request){
         //INSERT INTO categoria (cat_nome, cat_descricao)

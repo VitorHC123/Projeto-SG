@@ -7,6 +7,7 @@
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
     />
+    <meta name="description" content="Administração StoreGaming">.
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link
       rel="icon"
@@ -50,7 +51,7 @@
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
             <a href="index.html" class="logo">
-              <h2 style="color: white;">StroreGaming</h2>
+              <h2 style="color: white;">StoreGaming</h2>
             </a>
             <div class="nav-toggle">
               <button class="btn btn-toggle toggle-sidebar">
@@ -104,7 +105,7 @@
                 
               </li>
               <li class="nav-item">
-                <a  href="/adm-imagens">
+                <a  href="/imagens">
                   <i class="fas fa-pen-square"></i>
                   <p>Imagens</p>
                 </a>

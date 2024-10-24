@@ -10,4 +10,13 @@ class Imgs extends Model
     use HasFactory;
 
     protected $table = 'imgs';
+
+    protected $casts = [
+        'id' => 'integer', 
+    ];
+
+    protected $fillable = [
+        'img_nome',
+        'img',
+    ];
 }

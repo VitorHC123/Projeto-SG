@@ -8,52 +8,60 @@ use App\Models\Imgs;
 class ImgsController extends Controller
 {
     public function index(){
-        $imgs = Imgs::all();
-        return view('cliente.principal.index', compact('imgs'));
+        $imgs = Imgs::all();  
+        return view('adm.admin_imagens.index', compact('imgs'));  
+    }
+    
+
+    public function SalvarNovaImagem(Request $request)
+{
+    $request->validate([
+        'img_nome' => 'required|string|max:255',
+        'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    $img_nome = $request->input('img_nome');
+
+    if ($request->hasFile('img')) {
+        $imageName = $request->file('img')->store('imagens', 'public');
+    } else {
+        return redirect()->back()->with('error', 'Falha ao enviar a imagem!');
     }
 
-    public function SalvarNovaImagem(Request $request){
-        //INSERT INTO categoria (cat_nome, cat_descricao)
-        //               VALUES ('$cat_nome, $cat_descricao')
-        //id	nome	descricao	preco	jogo_img	fk_id_genero	fk_id_imgs	created_at	updated_at	
+    $imgs = new Imgs();
+    $imgs->img_nome = $img_nome;
+    $imgs->img = $imageName; 
+    $imgs->save();
 
-        $img_nome = $request->input('img_nome');
-        $img = $request->input('img');
+    return redirect()->route('imagens')->with('success', 'Imagem enviada com sucesso!');
+}
 
-        $imgs = new Imgs();
-        $imgs->img_nome = $img_nome;
-        $imgs->img = $img;
-        $imgs->save();
 
-        return redirect('adm.admin_principal.index');
+
+public function SalvarAlterecaoImagens(Request $request, $id){
+    $request->validate([
+        'img_nome' => 'required|string|max:255',
+        'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    $imgs = Imgs::find($id);
+    $imgs->img_nome = $request->input('img_nome');
+
+    if ($request->hasFile('img')) {
+        $imageName = $request->file('img')->store('imagens', 'public');
+        $imgs->img = $imageName; 
     }
 
-    // public function show(Jogo $jogo)
-    // {
-    //     return view('produtos.show', compact('produto'));
-    // }
+    $imgs->save();
 
-    // public function edit(Jogo $jogo)
-    // {
-    //     $jogo = Jogo::all();
-    //     return view('produtos.edit', compact('produto', 'categorias'));
-    // }
+    return redirect()->route('imagens')->with('success', 'Alteração feita com sucesso!');
+}
 
-    public function update(Request $request, Imgs $imgs)
+    public function destroyImagem($id)
     {
-        $request->validate([
-            'id' => 'required|exists:categorias,id',
-            'img_nome' => 'required|string|max:255',
-            'img' => 'nullable|string',
-        ]);
-
-        $imgs->update($request->all());
-        return redirect()->route('adm.admin_principal.index')->with('success', 'Produto atualizado com sucesso!');
-    }
-
-    public function destroy(Imgs $imgs)
-    {
+        $imgs = Imgs::find($id);
         $imgs->delete();
-        return redirect()->route('adm.admin_principal.index')->with('success', 'Produto removido com sucesso!');
+
+        return redirect()->route('imagens')->with('success', 'Imagem removida com sucesso!');
     }
 }
