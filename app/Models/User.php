@@ -43,8 +43,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-   public function jogo(){
-    return $this->belongsToMany('App\Models\Jogo');
-   }
+    public function jogos()
+    {
+        return $this->belongsToMany(Jogo::class, 'users_jogo', 'fk_user_id', 'fk_jogo_id')
+                    ->withPivot('download_date');
+    }
 
 }

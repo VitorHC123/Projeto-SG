@@ -126,17 +126,15 @@
     });
 
     function openEditModal(img) {
-    document.getElementById('imgs-id').value = img.id; // Preenche o ID
-    document.getElementById('imgs-img_nome').value = img.img_nome; // Preenche o nome da imagem
+    document.getElementById('imgs-id').value = img.id; 
+    document.getElementById('imgs-img_nome').value = img.img_nome; 
 
-    // Atualiza a imagem no modal
     const imgElement = document.getElementById('current-image');
-    imgElement.src = `{{ asset('storage') }}/${img.img}`; // Atualiza a fonte da imagem
-    imgElement.alt = img.img_nome; // Atualiza o texto alternativo
+    imgElement.src = `{{ asset('storage') }}/${img.img}`; 
+    imgElement.alt = img.img_nome; 
 
-    // Atualiza a ação do formulário para incluir o ID da imagem
     const form = document.getElementById('editImageForm');
-    form.action = `{{ url('imagens/udp') }}/${img.id}`; // Atualiza a URL do formulário
+    form.action = `{{ url('imagens/udp') }}/${img.id}`; 
 }
 </script>
 

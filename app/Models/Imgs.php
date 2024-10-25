@@ -19,4 +19,9 @@ class Imgs extends Model
         'img_nome',
         'img',
     ];
+
+    public function jogos()
+    {
+        return $this->hasMany(Jogo::class, 'fk_id_imgs');
+    }
 }
