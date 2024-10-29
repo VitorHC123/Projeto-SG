@@ -18,12 +18,14 @@ class User_Jogo extends Model
         'fk_jogo_id',
     ];
 
-    public function jogo(): BelongsTo{
-        return $this->belongsToMany(Jogo::class, 'id', 'fk_jogo_id');
-    }
+    // public function jogo(): BelongsTo
+    // {
+    //     return $this->belongsToMany(Jogo::class, 'id', 'fk_jogo_id');
+    // }
 
-    public function user(): BelongsTo{
+    // public function user(): BelongsTo
+    // {
 
-        return $this->belongsToMany(User::class, 'id', 'fk_user_id');
-    }
+    //     return $this->belongsToMany(User::class, 'id', 'fk_user_id');
+    // }
 }

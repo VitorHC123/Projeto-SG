@@ -45,8 +45,8 @@ class User extends Authenticatable
 
     public function jogos()
     {
-        return $this->belongsToMany(Jogo::class, 'users_jogo', 'fk_user_id', 'fk_jogo_id')
-                    ->withPivot('download_date');
+        return $this->belongsToMany(Jogo::class, 'users_jogo')
+            ->withPivot('download_date');
     }
 
 }

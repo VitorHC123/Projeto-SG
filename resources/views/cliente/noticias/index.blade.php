@@ -14,7 +14,7 @@
         </div>
         <div class="div_noticias">
             <div class="noticias">
-                
+
             </div>
             <div class="noticias">
 
@@ -24,6 +24,6 @@
 
 
 
-    
-    
+
+
 @stop

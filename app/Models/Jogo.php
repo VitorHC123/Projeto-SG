@@ -12,11 +12,11 @@ class Jogo extends Model
     protected $table = 'jogo';
 
     protected $fillable = [
-        'nome', 
-        'descricao', 
-        'preco', 
-        'fk_id_imgs',          
-        'jogo_img',    
+        'nome',
+        'descricao',
+        'preco',
+        'fk_id_imgs',
+        'jogo_img',
         'fk_id_genero',
     ];
 
@@ -32,12 +32,12 @@ class Jogo extends Model
 
     public function imagemFundo()
     {
-        return $this->belongsTo(Imgs::class, 'jogo_img'); 
+        return $this->belongsTo(Imgs::class, 'jogo_img');
     }
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'users_jogo', 'fk_jogo_id', 'fk_user_id')
-                    ->withPivot('download_date');
+        return $this->belongsToMany(User::class, 'users_jogo')
+            ->withPivot('download_date');
     }
 }

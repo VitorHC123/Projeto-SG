@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <link rel="icon" href="/icons/SG2.png">
     <title>Store Games</title>
 </head>
+
 <body>
     <header id="header">
         <nav>
@@ -28,26 +30,26 @@
                     </ul>
                 </div>
                 @auth
-                <div class="right-side">
-                    <a href="#user-card" class="img-link">
-                        <img src="/img/users.png" alt="img_header_users" class="img_users" id="img_users">
-                    </a>
-                
-                    <div id="user-card" class="user-card">
-                        <ul>
-                            <li><a href="#">Meu Perfil</a></li>
-                            <li><a href="#">Configurações</a></li>
-                            <li><form action="{{ route('logout-users') }}" method="POST" style="display: inline;">
-                                @csrf
-                                <input type="submit" value="SAIR" class="logout-link">
-                            </form>
-                            </li>
-                        </ul>
+                    <div class="right-side">
+                        <a href="#user-card" class="img-link">
+                            <img src="/img/users.png" alt="img_header_users" class="img_users" id="img_users">
+                        </a>
+
+                        <div id="user-card" class="user-card">
+                            <ul>
+                                <li><a href="#">Meu Perfil</a></li>
+                                <li><a href="#">Configurações</a></li>
+                                <li>
+                                    <form action="{{ route('logout-users') }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        <input type="submit" value="SAIR" class="logout-link">
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+
+
                     </div>
-                
-                    
-                </div>
-                
                 @else
                     <div class="right-side">
                         <form action="/login-user">
@@ -58,21 +60,21 @@
             </div>
         </nav>
     </header>
-    @yield("noticias")
-    @yield("sobre")
-    @yield("principal")
-    @yield("trabalhe_conosco")
+    @yield('noticias')
+    @yield('sobre')
+    @yield('principal')
+    @yield('trabalhe_conosco')
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-        $(document).ready(function(){
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
             var previousScroll = 0;
             var header = $('#header');
 
-            $(window).scroll(function(){
+            $(window).scroll(function() {
                 var currentScroll = $(this).scrollTop();
 
-                if (currentScroll > previousScroll){
+                if (currentScroll > previousScroll) {
                     header.css({
                         "top": "-100px",
                         "opacity": "0"
@@ -86,6 +88,7 @@
                 previousScroll = currentScroll;
             });
         });
-</script>
+    </script>
 </body>
+
 </html>

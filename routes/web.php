@@ -6,8 +6,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthUsersController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ImgsController;
+use App\Http\Controllers\PrincipalController;
+use App\Http\Controllers\MercadoPagoController;
 
-Route::get('/', [jogoController::class, 'index2'])->name('principal');
+Route::get('/', [PrincipalController::class, 'index'])->name('principal');
 
 Route::get('/trabalhe-conosco', function () {
     return view('cliente.trabalhe_conosco.index');
@@ -31,15 +33,27 @@ Route::get('/missao', function () {
 });
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/download', function () {
         return view('cliente.download.index');
-    });
+    })->name('download');
+
+    Route::post('/comprar-jogo', [PrincipalController::class, 'ComprarJogo'])->name('ComprarJogo');
+
+    Route::get('/pagamento', [MercadoPagoController::class, 'createPayment'])->name('pagamento');
+    Route::post('/notificacao', [MercadoPagoController::class, 'notification'])->name('mercadopago.notification');
+    Route::get('/pagamento-sucesso', [MercadoPagoController::class, 'paymentSuccess'])->name('payment.success');
+    Route::get('/pagamento-falha', [MercadoPagoController::class, 'paymentFailure'])->name('payment.failure');
+    Route::get('/pagamento-pendente', [MercadoPagoController::class, 'paymentPending'])->name('payment.pending');
+
+
+
 });
 
-Route::get('/login-user', function(){
+Route::get('/login-user', function () {
     return view('cliente.principal.login');
 })->name('login-user');
-Route::get('/registrar', function(){
+Route::get('/registrar', function () {
     return view('cliente.principal.cadastrar');
 });
 Route::post('/logout-users', [AuthUsersController::class, 'logout'])->name('logout-users');
@@ -48,13 +62,13 @@ Route::post('/login-user', [AuthUsersController::class, 'login']);
 
 // ADMIN
 Route::middleware('adminAuth')->group(function () {
-    
+
     Route::get('/adm', [AuthUsersController::class, 'qtdeUsers'])->name('qtdeUser');
 
-    Route::get('/adm-jogos', [jogoController::class, 'index'])->name('adm.admin_jogos.index'); 
-    Route::post('/jogo/salvar', [jogoController::class, 'SalvarNovoJogo'])->name('SalvarNovoJogo'); 
-    Route::post('/jogo/atualizar/{jogo}', [jogoController::class, 'update'])->name('jogo_atualizar'); 
-    Route::delete('/jogo/excluir/{jogo}', [jogoController::class, 'destroy'])->name('jogo_excluir'); 
+    Route::get('/adm-jogos', [jogoController::class, 'index'])->name('adm.admin_jogos.index');
+    Route::post('/jogo/salvar', [jogoController::class, 'SalvarNovoJogo'])->name('SalvarNovoJogo');
+    Route::post('/jogo/atualizar/{jogo}', [jogoController::class, 'update'])->name('jogo_atualizar');
+    Route::delete('/jogo/excluir/{jogo}', [jogoController::class, 'destroy'])->name('jogo_excluir');
 
     Route::get('/cadastro', [AuthUsersController::class, 'index'])->name('cadastro');
     Route::get('/cadastro/upd/{id}', [AuthUsersController::class, 'BuscaAlterar'])->name('cad_alterar');
@@ -67,12 +81,15 @@ Route::middleware('adminAuth')->group(function () {
     Route::delete('/imagens/exc/{id}', [ImgsController::class, 'destroyImagem'])->name('img_excluir');
 });
 
-Route::get('/login-adm', function(){
+Route::get('/login-adm', function () {
     return view('adm.admin_principal.login');
 })->name('login-adm');
-Route::get('/registrar-adm', function(){
+Route::get('/registrar-adm', function () {
     return view('adm.admin_principal.cadastrar');
 });
 Route::post('/logout', [AuthController::class, 'logoutAdm'])->name('logout');
 Route::post('registrar-adm', [AuthController::class, 'registrarAdm']);
 Route::post('/login-adm', [AuthController::class, 'loginAdm'])->name('login-adm');
+
+
+

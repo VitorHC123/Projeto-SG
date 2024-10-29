@@ -30,5 +30,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'mercadopago' => [
+    'access_token' => env('MERCADO_PAGO_ACCESS_TOKEN'),
+    'public_key' => env('MERCADO_PAGO_PUBLIC_KEY'),
+],
+
 
 ];

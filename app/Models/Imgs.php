@@ -12,7 +12,7 @@ class Imgs extends Model
     protected $table = 'imgs';
 
     protected $casts = [
-        'id' => 'integer', 
+        'id' => 'integer',
     ];
 
     protected $fillable = [

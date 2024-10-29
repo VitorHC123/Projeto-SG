@@ -19,19 +19,20 @@ class AuthUsersController extends Controller
 
     public function qtdeUsers()
     {
-        $qtdaUsers = User::count(); 
-        return view('adm.admin_principal.index', compact('qtdaUsers')); 
+        $qtdaUsers = User::count();
+        return view('adm.admin_principal.index', compact('qtdaUsers'));
     }
 
 
     public function destroy($id)
     {
-        $user = User::findOrFail($id); 
-        $user->delete(); 
-        return redirect()->route('cadastro')->with('success', 'Usuário removido com sucesso!'); 
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('cadastro')->with('success', 'Usuário removido com sucesso!');
     }
 
-    public function BuscaAlterar($id){
+    public function BuscaAlterar($id)
+    {
         $users = User::where("id", $id)->first();
 
         return view('cadastro.alterar', compact('users'));
@@ -43,24 +44,24 @@ class AuthUsersController extends Controller
             'id' => 'required|integer|exists:users,id',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $request->id,
-            'password' => 'nullable|string|min:8|confirmed', 
+            'password' => 'nullable|string|min:8|confirmed',
         ]);
 
         $user = User::findOrFail($validatedData['id']);
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
 
-        
+
         if ($request->input('password')) {
-            $user->password = Hash::make($validatedData['password']); 
+            $user->password = Hash::make($validatedData['password']);
         }
 
-        $user->save(); 
+        $user->save();
 
         return redirect()->route('cadastro')->with('success', 'Usuário atualizado com sucesso!');
     }
 
-    
+
 
     public function login(Request $request)
     {
@@ -75,7 +76,7 @@ class AuthUsersController extends Controller
             // Login bem-sucedido
             $request->session()->regenerate();
 
-            return view('cliente.principal.index');
+            return redirect()->route('principal');
         }
 
         // Se as credenciais estiverem erradas
@@ -105,7 +106,8 @@ class AuthUsersController extends Controller
         return view('cliente.principal.login');
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

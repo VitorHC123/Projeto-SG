@@ -11,7 +11,7 @@ class Genero extends Model
 
     protected $table = 'genero';
 
-    protected $fillable = ['genero']; 
+    protected $fillable = ['genero'];
 
     public function jogos()
     {

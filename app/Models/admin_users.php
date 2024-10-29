@@ -11,8 +11,7 @@ class admin_users extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    // Definindo a tabela explicitamente
-    protected $table = 'admin_users'; // Para garantir que a tabela seja admin_users
+    protected $table = 'admin_users'; 
 
     /**
      * The attributes that are mass assignable.
