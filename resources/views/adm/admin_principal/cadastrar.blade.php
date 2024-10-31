@@ -50,7 +50,7 @@
                 @endforeach
             @endif
 
-            <form action="/registrar" method="POST">
+            <form action="/registrar-adm" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">Name</label>

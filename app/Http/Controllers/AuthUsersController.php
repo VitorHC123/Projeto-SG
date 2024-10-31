@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Jogo;
+use App\Models\Imgs;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,9 +22,12 @@ class AuthUsersController extends Controller
     public function qtdeUsers()
     {
         $qtdaUsers = User::count();
-        return view('adm.admin_principal.index', compact('qtdaUsers'));
+        $users = User::all();
+        $qtdaJogos = Jogo::count();   
+        $totalPreco = Jogo::sum('preco'); 
+        $totalImgs = Imgs::count('img'); 
+        return view('adm.admin_principal.index', compact('qtdaUsers', 'qtdaJogos', 'totalPreco', 'users', 'totalImgs'));
     }
-
 
     public function destroy($id)
     {

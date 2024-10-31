@@ -8,6 +8,8 @@
     <meta name="description" content="Administração StoreGaming">.
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="/Admin/img/kaiadmin/favicon.ico" type="image/x-icon" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <!-- Fonts and icons -->
     <script src="/Admin/js/plugin/webfont/webfont.min.js"></script>
@@ -47,7 +49,7 @@
             <div class="sidebar-logo">
                 <!-- Logo Header -->
                 <div class="logo-header" data-background-color="dark">
-                    <a href="index.html" class="logo">
+                    <a href="/adm" class="logo">
                         <h2 style="color: white;">StoreGaming</h2>
                     </a>
                     <div class="nav-toggle">
@@ -101,6 +103,13 @@
                             <a href="/imagens">
                                 <i class="fas fa-pen-square"></i>
                                 <p>Imagens</p>
+                            </a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a href="/users_jogo">
+                                <i class="fas fa-pen-square"></i>
+                                <p>Jogo e Usuario</p>
                             </a>
 
                         </li>

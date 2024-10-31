@@ -45,16 +45,17 @@
                 </div>
 
                 @foreach ($jogo as $linha)
-                    <form action="/download" method="GET">
-                        <input type="hidden" name="id" value="{{ $linha->id }}">
+                <form action="{{ route('comprar', $linha->id) }}" method="GET">
+                        @csrf
                         <div class="sub_jogos">
                             <div class="jogo">
-                                <button type="submit" >
+                                <button type="submit" class="button_jogo">
                                     <img src="{{ asset('storage/' . $linha->imagemPerfil->img) }}">
                             </div>
                             </button>
                     </form>
                 @endforeach
+               
             </div>
         </div>
         </div>

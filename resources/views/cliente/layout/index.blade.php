@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="/css/cssSobre.css">
     <link rel="stylesheet" href="/css/cssTrabalheConosco.css">
     <link rel="stylesheet" href="/css/cssNoticias.css">
+    <link rel="stylesheet" href="/css/mercadopago.css">
     <link rel="icon" href="/icons/SG2.png">
+
     <title>Store Games</title>
 </head>
 

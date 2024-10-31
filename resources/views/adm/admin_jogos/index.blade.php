@@ -48,7 +48,7 @@
                             <td>
                                 @if ($linha->imagemPerfil)
                                     <img src="{{ asset('storage/' . $linha->imagemPerfil->img) }}"
-                                        alt="{{ $linha->imagemPerfil->img_nome }}" width="50">
+                                        alt="{{ $linha->imagemPerfil->img_nome }}" width="120">
                                 @else
                                     <span>Sem imagem de perfil</span>
                                 @endif
@@ -57,7 +57,7 @@
                             <td>
                                 @if ($linha->imagemFundo)
                                     <img src="{{ asset('storage/' . $linha->imagemFundo->img) }}"
-                                        alt="{{ $linha->imagemFundo->img_nome }}" width="50">
+                                        alt="{{ $linha->imagemFundo->img_nome }}" width="120">
                                 @else
                                     <span>Sem imagem de fundo</span>
                                 @endif
@@ -119,18 +119,39 @@
                             <label for="user-preco">Preço</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="file" class="form-control" name="jogo_img" id="user-jogo_img" accept="image/*">
-                            <label for="user-jogo_img">Imagem perfil</label>
+                            <select class="form-control" name="jogo_img" id="user-jogo_img" required>
+                                <option value="" disabled>Selecione a Imagem de Perfil</option>
+                                @foreach ($imagens as $img)
+                                    <option value="{{ $img->id }}"
+                                        {{ $img->id == $linha->jogo_img ? 'selected' : '' }}>
+                                        {{ $img->img_nome }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
+
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="genero" id="user-genero"
-                                value="{{ $linha->fk_id_genero }}" required>
-                            <label for="user-genero">Gênero</label>
+                            <select class="form-control" name="img" id="user-img" required>
+                                <option value="" disabled>Selecione a Imagem de Fundo</option>
+                                @foreach ($imagens as $img)
+                                    <option value="{{ $img->id }}"
+                                        {{ $img->id == $linha->fk_id_imgs ? 'selected' : '' }}>
+                                        {{ $img->img_nome }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
+
                         <div class="form-floating mb-3">
-                            <input type="file" class="form-control" name="img" id="user-img" accept="image/*">
-                            <label for="user-img">Imagem fundo</label>
+                            <select class="form-control" name="fk_id_genero" id="jogo-genero" required>
+                                <option value="" disabled selected>Selecione o Gênero</option>
+                                @foreach ($generos as $genero)
+                                    <option value="{{ $genero->id }}">{{ $genero->genero }}</option>
+                                @endforeach
+                            </select>
+                            <label for="jogo-genero">Gênero</label>
                         </div>
+
                         <div class="d-flex justify-content-between">
                             <button type="submit" class="btn btn-success">Salvar</button>
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
@@ -234,9 +255,10 @@
             $('#user-name').val(jogo.nome);
             $('#user-descricao').val(jogo.descricao);
             $('#user-preco').val(jogo.preco);
-            $('#user-genero').val(jogo.fk_id_genero);
+            $('#user-genero').val(jogo.fk_id_genero).trigger('change');
             $('#user-jogo_img').val('');
             $('#user-img').val('');
+
         }
 
         $(document).ready(function() {

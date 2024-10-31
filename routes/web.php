@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ImgsController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\MercadoPagoController;
+use App\Http\Controllers\UsersJogoController;
+
 
 Route::get('/', [PrincipalController::class, 'index'])->name('principal');
 
@@ -38,13 +40,12 @@ Route::middleware('auth')->group(function () {
         return view('cliente.download.index');
     })->name('download');
 
-    Route::post('/comprar-jogo', [PrincipalController::class, 'ComprarJogo'])->name('ComprarJogo');
+    Route::get('/comprar/{id}', [MercadoPagoController::class, 'showCompra'])->name('comprar');
 
-    Route::get('/pagamento', [MercadoPagoController::class, 'createPayment'])->name('pagamento');
+    Route::post('/pagamento', [MercadoPagoController::class, 'createPayment'])->name('pagamento');
     Route::post('/notificacao', [MercadoPagoController::class, 'notification'])->name('mercadopago.notification');
-    Route::get('/pagamento-sucesso', [MercadoPagoController::class, 'paymentSuccess'])->name('payment.success');
+    Route::get('/mercadopago/success', [MercadoPagoController::class, 'paymentSuccess'])->name('mercadopago.success');
     Route::get('/pagamento-falha', [MercadoPagoController::class, 'paymentFailure'])->name('payment.failure');
-    Route::get('/pagamento-pendente', [MercadoPagoController::class, 'paymentPending'])->name('payment.pending');
 
 
 
@@ -79,6 +80,10 @@ Route::middleware('adminAuth')->group(function () {
     Route::post('/imagens', [ImgsController::class, "SalvarNovaImagem"])->name('SalvarNovaImagem');
     Route::post('imagens/udp/{id}', [ImgsController::class, 'SalvarAlterecaoImagens'])->name('img_alt_salva');
     Route::delete('/imagens/exc/{id}', [ImgsController::class, 'destroyImagem'])->name('img_excluir');
+
+
+    Route::get('/users_jogo', [UsersJogoController::class, 'index'])->name('users_jogo.index');
+    Route::post('/users_jogo', [UsersJogoController::class, 'store'])->name('users_jogo.store');
 });
 
 Route::get('/login-adm', function () {

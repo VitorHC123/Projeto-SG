@@ -9,23 +9,32 @@ class User_Jogo extends Model
 {
     use HasFactory;
 
+    public $timestamps = false; 
     protected $table = 'users_jogo';
-    protected $primaryKey = 'fk_user_id	';
-    protected $primaryKey2 = 'fk_jogo_id';
 
     protected $fillable = [
-        'fk_user_id',
-        'fk_jogo_id',
+        'fk_user_id', 
+        'fk_jogo_id', 
+        'valor', 
+        'nome_user', 
+        'download_date', 
+        'payment_id', 
+        'status'
     ];
 
-    // public function jogo(): BelongsTo
-    // {
-    //     return $this->belongsToMany(Jogo::class, 'id', 'fk_jogo_id');
-    // }
+    protected $casts = [
+        'valor' => 'float',
+        'download_date' => 'datetime',
+    ];
 
-    // public function user(): BelongsTo
-    // {
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'fk_user_id');
+    }
 
-    //     return $this->belongsToMany(User::class, 'id', 'fk_user_id');
-    // }
+    public function jogo()
+    {
+        return $this->belongsTo(Jogo::class, 'fk_jogo_id');
+    }
+    
 }

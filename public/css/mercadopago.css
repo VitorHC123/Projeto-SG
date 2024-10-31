@@ -1,0 +1,90 @@
+  .container_mercado {
+    background: radial-gradient(circle, rgba(0, 102, 204, 1) 0%, rgba(0, 51, 102, 1) 50%, rgba(0, 0, 0, 1) 100%);
+
+    margin-top: 100px;
+    padding: 38px;
+  }
+
+
+  .content_mercado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    color: white;
+  }
+
+  .header_mercado {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .image_mercado {
+    width: 50%;
+    height: auto;
+
+  }
+
+  .img_mercado {
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(10, 105, 200, 0.5), 0 8px 30px rgba(2, 76, 151, 0.3);
+  }
+
+  .info_mercado {
+    width: 45%;
+    padding: 50px;
+    border: 1px solid white;
+  }
+
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+  }
+
+  .description {
+    margin-top: 10px;
+    color: white;
+  }
+
+  .details {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .detail-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .detail-label {
+    font-weight: bold;
+    color: white;
+  }
+
+  .detail-value {
+    margin-top: 5px;
+    color: white;
+  }
+
+  .button-mercado {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .button-mercado:hover {
+    background-color: #45a049;
+  }
+
+  .button-mercado:active {
+    background-color: #388E3C;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }

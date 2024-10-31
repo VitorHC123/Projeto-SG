@@ -18,19 +18,16 @@ return new class extends Migration
             $table->float('preco')->nullable();
             $table->string('jogo_img')->nullable();
             $table->bigInteger('fk_id_genero')->unsigned();
-            $table->bigInteger('fk_id_imgs')->unsigned();
-           
-
+            $table->bigInteger('fk_id_imgs')->unsigned()->nullable(); 
 
             $table->foreign('fk_id_genero')
-                    ->references('id')
-                    ->on('genero');
+                ->references('id')
+                ->on('genero');
 
             $table->foreign('fk_id_imgs')
-                    ->references('id')
-                    ->on('imgs');
-
-            
+                ->references('id')
+                ->on('imgs')
+                ->onDelete('set null'); 
 
             $table->timestamps();
         });

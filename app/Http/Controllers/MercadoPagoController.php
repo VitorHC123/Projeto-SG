@@ -1,49 +1,59 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use MercadoPago\SDK;
 use MercadoPago\Preference;
 use MercadoPago\Item;
+use App\Models\Jogo;
+use App\Models\Imgs;
+use App\Models\User_jogo;
+use Illuminate\Support\Facades\Auth;
 
 class MercadoPagoController extends Controller
 {
     public function __construct()
     {
-        // Definindo o token de acesso do Mercado Pago
         SDK::setAccessToken(config('services.mercadopago.access_token'));
+    }
+
+    public function index(Request $request)
+    {
+        $jogo = Jogo::all();
+    }
+
+    public function showCompra(Request $request, $id)
+    {
+        $jogo = Jogo::findOrFail($id);
+
+        return view('cliente.download.mercado_pago', ['jogo' => $jogo]);
     }
 
     /**
      * Cria a preferência de pagamento e redireciona para a view de pagamento.
      */
-    public function createPayment()
+    public function createPayment(Request $request)
     {
-        // Cria uma nova preferência de pagamento
-        $preference = new Preference();
+        $jogoId = $request->input('id');
+        $jogo = Jogo::findOrFail($jogoId);
 
-        // Configura o item do pagamento (exemplo)
+        $preference = new Preference();
         $item = new Item();
-        $item->title = 'Produto Exemplo';
+        $item->title = $jogo->nome;
         $item->quantity = 1;
-        $item->unit_price = 100.00; // preço do produto em reais
+        $item->unit_price = $jogo->preco;
 
         $preference->items = [$item];
-
-        // URLs de redirecionamento após o pagamento
         $preference->back_urls = [
-            'success' => route('payment.success'),
+            'success' => route('mercadopago.success'),
             'failure' => route('payment.failure'),
-            'pending' => route('payment.pending')
         ];
         $preference->auto_return = 'approved';
-
-        // Salva a preferência no Mercado Pago
+        $preference->external_reference = $jogoId; // passa o ID do jogo para o callback
         $preference->save();
 
-        return view('mercado_pago', ['preference' => $preference]);
+        return redirect($preference->init_point);
     }
 
     /**
@@ -52,44 +62,62 @@ class MercadoPagoController extends Controller
     public function notification(Request $request)
     {
         $data = $request->all();
-
-        // Log de notificação para fins de depuração
         \Log::info('Notificação do Mercado Pago:', $data);
 
         if (isset($data['type']) && $data['type'] === 'payment') {
-            // Lógica para atualizar status do pagamento no banco de dados
             $paymentId = $data['data']['id'];
             $paymentStatus = $data['data']['status'];
-
-            // Atualize o status do pagamento no banco de dados conforme o ID do pagamento
-            // Exemplo:
-            // Payment::where('payment_id', $paymentId)->update(['status' => $paymentStatus]);
-
             return response()->json(['status' => 'sucesso'], 200);
         }
 
         return response()->json(['status' => 'ignorado'], 200);
     }
 
-    /**
-     * Redireciona o usuário após o pagamento bem-sucedido.
-     */
-    public function paymentSuccess()
+    private function saveSale($userId, $userName, $jogoId, $paymentId, $status)
     {
-        return view('payment_success');
+        User_Jogo::create([
+            'fk_user_id' => $userId,
+            'nome_user' => $userName,
+            'fk_jogo_id' => $jogoId,
+            'valor' => $status === 'approved' ? $this->getGamePrice($jogoId) : 0,
+            'payment_id' => $paymentId,
+            'status' => $status,
+        ]);
+    }
+
+    private function getGamePrice($jogoId)
+    {
+        $jogo = Jogo::find($jogoId);
+        return $jogo ? $jogo->preco : 0;
     }
 
     /**
-     * Redireciona o usuário se o pagamento falhar.
+     * Redireciona o usuário após o pagamento bem-sucedido.
      */
+    public function paymentSuccess(Request $request)
+    {
+        $payment_id = $request->query('payment_id');
+        $status = $request->query('status');
+        $jogo_id = $request->query('external_reference');
+
+        $jogo = Jogo::find($jogo_id);
+
+        if ($jogo) {
+            $user = Auth::user();
+            if ($user) {
+                $userName = $user->name;
+                $this->saveSale($user->id, $userName, $jogo_id, $payment_id, $status);
+            }
+        }
+
+        return view('cliente.download.index', compact('payment_id', 'status', 'jogo'));
+    }
+
     public function paymentFailure()
     {
         return view('payment_failure');
     }
 
-    /**
-     * Redireciona o usuário se o pagamento ficar pendente.
-     */
     public function paymentPending()
     {
         return view('payment_pending');

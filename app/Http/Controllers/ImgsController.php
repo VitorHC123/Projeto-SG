@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Imgs;
+use App\Models\Jogo;
 
 class ImgsController extends Controller
 {
@@ -60,10 +61,16 @@ class ImgsController extends Controller
     }
 
     public function destroyImagem($id)
-    {
-        $imgs = Imgs::find($id);
-        $imgs->delete();
+{
+    // Verifica se a imagem está sendo usada na tabela `jogo`
+    Jogo::where('fk_id_imgs', $id)->update(['fk_id_imgs' => null]);
 
-        return redirect()->route('imagens')->with('success', 'Imagem removida com sucesso!');
+    $imgs = Imgs::find($id);
+
+    if ($imgs) {
+        $imgs->delete();
     }
+
+    return redirect()->route('imagens')->with('success', 'Imagem removida com sucesso!');
+}
 }

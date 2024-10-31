@@ -51,31 +51,34 @@ class jogoController extends Controller
 
 
     public function update(Request $request, Jogo $jogo)
-    {
-        $request->validate([
-            'id' => 'required|exists:jogo,id',
-            'nome' => 'required|string|max:255',
-            'descricao' => 'nullable|string',
-            'preco' => 'required|numeric|min:0',
-            'genero' => 'required|exists:genero,id',
-            'jogo_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+{
+    $request->validate([
+        'id' => 'required|exists:jogo,id',
+        'nome' => 'required|string|max:255',
+        'descricao' => 'nullable|string',
+        'preco' => 'required|numeric|min:0',
+        'fk_id_genero' => 'required|exists:genero,id',
+        'jogo_img' => 'nullable|exists:imgs,id', 
+        'img' => 'nullable|exists:imgs,id',
+    ]);
 
-        $jogo->update($request->except(['jogo_img', 'img']));
+    $jogo->update($request->except(['jogo_img', 'img']));
 
-        if ($request->hasFile('jogo_img')) {
-            $jogo->jogo_img = $request->file('jogo_img')->store('imagens', 'public');
-        }
+    $jogo->fk_id_genero = $request->input('fk_id_genero');
 
-        if ($request->hasFile('img')) {
-            $jogo->fk_id_imgs = $request->file('img')->store('imagens', 'public');
-        }
-
-        $jogo->save();
-
-        return redirect()->route('adm.admin_jogos.index')->with('success', 'Jogo atualizado com sucesso!');
+    if ($request->filled('jogo_img')) {
+        $jogo->jogo_img = $request->input('jogo_img');
     }
+    
+    if ($request->filled('img')) {
+        $jogo->fk_id_imgs = $request->input('img');
+    }
+
+    $jogo->save();
+
+    return redirect()->route('adm.admin_jogos.index')->with('success', 'Jogo atualizado com sucesso!');
+}
+
 
     public function destroy(Jogo $jogo)
     {

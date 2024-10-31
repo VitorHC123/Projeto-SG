@@ -22,7 +22,7 @@ class PrincipalController extends Controller
         return view('cliente.principal.index', compact('jogo', 'imagens' , 'generos'));
     }
 
-    public function ComprarJogo(Request $request){
+    public function BaixarJogo(Request $request){
         $id = $request->input('id');
         Auth::loginUsingId($id);
         $Novo = new User_Jogo();

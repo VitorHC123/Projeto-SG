@@ -228,6 +228,13 @@
     transition: 1s;
 }
 
+.button_jogo{
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
 
 .principal_contratacao{
     font-family: sans-serif;

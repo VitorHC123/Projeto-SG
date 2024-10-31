@@ -26,7 +26,7 @@
                             </div>
                             <div class="col col-stats ms-3 ms-sm-0">
                                 <div class="numbers">
-                                    <p class="card-category">Perfis</p>
+                                    <p class="card-category">Perfis de Usuários</p>
                                     <h4 class="card-title">{{ $qtdaUsers }}</h4>
                                 </div>
                             </div>
@@ -45,8 +45,8 @@
                             </div>
                             <div class="col col-stats ms-3 ms-sm-0">
                                 <div class="numbers">
-                                    <p class="card-category">NULL</p>
-                                    <h4 class="card-title">---------</h4>
+                                    <p class="card-category">Jogos Cadastrados</p>
+                                    <h4 class="card-title">{{ $qtdaJogos }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                             <div class="col col-stats ms-3 ms-sm-0">
                                 <div class="numbers">
                                     <p class="card-category">Lucros</p>
-                                    <h4 class="card-title">$ 1,345</h4>
+                                    <h4 class="card-title">R${{ $totalPreco }},00</h4>
                                 </div>
                             </div>
                         </div>
@@ -83,8 +83,8 @@
                             </div>
                             <div class="col col-stats ms-3 ms-sm-0">
                                 <div class="numbers">
-                                    <p class="card-category">NULL</p>
-                                    <h4 class="card-title">-------</h4>
+                                    <p class="card-category">Imagens Cadastradas</p>
+                                    <h4 class="card-title">{{ $totalImgs }}</h4>
                                 </div>
                             </div>
                         </div>
@@ -111,13 +111,33 @@
                                     <div class="username">Vitor Hugo Correia</div>
                                     <div class="status">Dono e Fundador da SG </div>
                                 </div>
-                                <button class="btn btn-icon btn-link op-8 me-1">
+                                
+                                {{-- <button class="btn btn-icon btn-link op-8 me-1">
                                     <i class="far fa-envelope"></i>
                                 </button>
                                 <button class="btn btn-icon btn-link btn-danger op-8">
                                     <i class="fas fa-ban"></i>
-                                </button>
+                                </button> --}}
                             </div>
+
+                            @foreach ($users as $usuarios)
+                            <div class="item-list">
+                                <div class="avatar">
+                                    <img src="/img/users.png" alt="..." class="avatar-img rounded-circle" />
+                                </div>
+                                <div class="info-user ms-3">
+                                    <div class="username">{{$usuarios->name}}</div>
+                                    <div class="status">{{$usuarios->email}} </div>
+                                </div>
+                                
+                                {{-- <button class="btn btn-icon btn-link op-8 me-1">
+                                    <i class="far fa-envelope"></i>
+                                </button>
+                                <button class="btn btn-icon btn-link btn-danger op-8">
+                                    <i class="fas fa-ban"></i>
+                                </button> --}}
+                            </div>
+                            @endforeach
 
                         </div>
                     </div>
