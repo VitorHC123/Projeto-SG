@@ -50,7 +50,7 @@ class MercadoPagoController extends Controller
             'failure' => route('payment.failure'),
         ];
         $preference->auto_return = 'approved';
-        $preference->external_reference = $jogoId; // passa o ID do jogo para o callback
+        $preference->external_reference = $jogoId; 
         $preference->save();
 
         return redirect($preference->init_point);
